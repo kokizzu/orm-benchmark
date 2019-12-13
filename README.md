@@ -11,7 +11,7 @@ see [here](https://kokizzu.blogspot.com/2019/12/go-orm-benchmark-on-memsql.html)
 * 32 GB RAM
 * go version go1.13.4 linux/amd64
 * [Go-MySQL-Driver Latest](https://github.com/go-sql-driver/mysql)
-* MemSQL 6.7.16
+* MemSQL 6.7.16, 7.0.9, MySQL 5.7.28
 
 ### ORMs
 
@@ -32,6 +32,19 @@ All package run in no-cache mode.
 go get github.com/kokizzu/orm-benchmark
 orm-benchmark -multi=20 -orm=all
 ```
+### TODO
+
+add more ORM:
+
+* [Facebook's Ent](https://github.com/facebookincubator/ent)
+* [QuerySet](https://github.com/jirfag/go-queryset)
+* [SqlBuilder](https://github.com/huandu/go-sqlbuilder)
+* [Grimoire](https://github.com/Fs02/grimoire)
+* [Lore](https://github.com/abrahambotros/lore)
+* [Marlow](https://github.com/dadleyy/marlow)
+* [Pop/Soda](https://github.com/gobuffalo/pop)
+* [Reform](https://github.com/go-reform/reform)
+* [SQLBoiler](https://github.com/volatiletech/sqlboiler)
 
 ### Contact
 
