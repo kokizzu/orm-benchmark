@@ -2,8 +2,8 @@ package benchs
 
 import (
 	"fmt"
-
-	"github.com/coocood/qbs"
+	
+	"github.com/kokizzu/qbs"
 )
 
 var qo *qbs.Qbs
@@ -17,7 +17,7 @@ func init() {
 		st.AddBenchmark("Read", 4000*ORM_MULTI, QbsRead)
 		st.AddBenchmark("MultiRead limit 100", 2000*ORM_MULTI, QbsReadSlice)
 
-		qbs.Register("mysql", ORM_SOURCE, "model", qbs.NewMysql())
+		qbs.Register("mysql", ORM_SOURCE, "model", qbs.NewMemsql())
 		qbs.ChangePoolSize(ORM_MAX_IDLE)
 		qbs.SetConnectionLimit(ORM_MAX_CONN, true)
 
@@ -110,7 +110,7 @@ func QbsReadSlice(b *B) {
 
 	for i := 0; i < b.N; i++ {
 		var models []*Model
-		if err := qo.Where("id > ?", 0).Limit(100).FindAll(&models); err != nil {
+		if err := qo.Where(`id > ? LIMIT 100`,0).FindAll(&models); err != nil { // memsql bug? cannot use .Limit(100)
 			fmt.Println(err)
 			b.FailNow()
 		}

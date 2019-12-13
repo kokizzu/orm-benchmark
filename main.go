@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/kihamo/orm-benchmark/benchs"
+	"github.com/kokizzu/orm-benchmark/benchs"
 
 	_ "github.com/go-sql-driver/mysql"
 )

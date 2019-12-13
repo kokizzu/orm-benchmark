@@ -3,10 +3,10 @@ package benchs
 import (
 	"fmt"
 
-	"github.com/jinzhu/gorm"
+	"github.com/kokizzu/gorm"
 )
 
-var gm gorm.DB
+var gm *gorm.DB
 
 func init() {
 	st := NewSuite("gorm")
@@ -17,7 +17,7 @@ func init() {
 		st.AddBenchmark("Read", 4000*ORM_MULTI, GormRead)
 		st.AddBenchmark("MultiRead limit 100", 2000*ORM_MULTI, GormReadSlice)
 
-		gm, _ = gorm.Open("mysql", ORM_SOURCE)
+		gm, _ = gorm.Open(`memsql`,`mysql`, ORM_SOURCE)
 		gm.DB().SetMaxIdleConns(ORM_MAX_IDLE)
 		gm.DB().SetMaxOpenConns(ORM_MAX_CONN)
 

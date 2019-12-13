@@ -4,8 +4,8 @@ import (
 	"database/sql"
 	"fmt"
 
-	"upper.io/db"
-	"upper.io/db/mysql"
+	"upper.io/db.v3"
+	"upper.io/db.v3/mysql"
 )
 
 var ui db.Database
@@ -37,8 +37,8 @@ func UpperIOInsert(b *B) {
 
 	for i := 0; i < b.N; i++ {
 		m.Id = 0
-		collection, _ := ui.Collection("model")
-		if _, err := collection.Append(m); err != nil {
+		collection := ui.Collection("model")
+		if _, err := collection.Insert(m); err != nil {
 			fmt.Println(err)
 			b.FailNow()
 		}
@@ -56,8 +56,8 @@ func UpperIOUpdate(b *B) {
 	wrapExecute(b, func() {
 		initDB()
 		m = NewModel()
-		c, _ := ui.Collection("model")
-		id, _ := c.Append(m)
+		c := ui.Collection("model")
+		id, _ := c.Insert(m)
 		r = c.Find(db.Cond{"id =": id})
 	})
 
@@ -76,12 +76,12 @@ func UpperIORead(b *B) {
 	wrapExecute(b, func() {
 		initDB()
 		m = NewModel()
-		c, _ := ui.Collection("model")
-		id, _ = c.Append(m)
+		c := ui.Collection("model")
+		id, _ = c.Insert(m)
 	})
 
 	for i := 0; i < b.N; i++ {
-		collection, _ := ui.Collection("model")
+		collection := ui.Collection("model")
 		if err := collection.Find(db.Cond{"id": id}).One(m); err != nil {
 			fmt.Println(err)
 			b.FailNow()
@@ -95,10 +95,10 @@ func UpperIOReadSlice(b *B) {
 		initDB()
 		m = NewModel()
 
-		c, _ := ui.Collection("model")
+		c := ui.Collection("model")
 		for i := 0; i < 100; i++ {
 			m.Id = 0
-			if _, err := c.Append(m); err != nil {
+			if _, err := c.Insert(m); err != nil {
 				fmt.Println(err)
 				b.FailNow()
 			}
@@ -107,7 +107,7 @@ func UpperIOReadSlice(b *B) {
 
 	for i := 0; i < b.N; i++ {
 		var models []Model
-		collection, _ := ui.Collection("model")
+		collection := ui.Collection("model")
 		if err := collection.Find(db.Cond{"id > ": 0}).Limit(100).All(&models); err != nil {
 			fmt.Println(err)
 			b.FailNow()

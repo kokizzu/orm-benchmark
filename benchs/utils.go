@@ -7,14 +7,14 @@ import (
 )
 
 type Model struct {
-	Id      int `qbs:"pk" sql:"pk"`
-	Name    string
-	Title   string
-	Fax     string
-	Web     string
-	Age     int
-	Right   bool
-	Counter int64
+	Id      int `qbs:"pk" sql:"pk" db:"id"`
+	Name    string `db:"name"`
+	Title   string `db:"title"`
+	Fax     string `db:"fax"`
+	Web     string `db:"web"`
+	Age     int `db:"age"`
+	Right   bool `db:"right"`
+	Counter int64 `db:"counter"`
 }
 
 func NewModel() *Model {
@@ -55,13 +55,13 @@ func initDB() {
 		"DROP TABLE IF EXISTS `model`",
 		"CREATE TABLE `orm_bench`.`model` (" +
 			"`id` int(11) NOT NULL AUTO_INCREMENT," +
-			"`name` varchar(255) NOT NULL," +
-			"`title` varchar(255) NOT NULL," +
-			"`fax` varchar(255) NOT NULL," +
-			"`web` varchar(255) NOT NULL," +
-			"`age` int(11) NOT NULL," +
-			"`right` tinyint(1) NOT NULL," +
-			"`counter` bigint(20) NOT NULL," +
+			"`name` varchar(255) DEFAULT ''," +
+			"`title` varchar(255) DEFAULT ''," +
+			"`fax` varchar(255) DEFAULT ''," +
+			"`web` varchar(255) DEFAULT ''," +
+			"`age` int(11) DEFAULT 0," +
+			"`right` tinyint(1) DEFAULT 0," +
+			"`counter` bigint(20) DEFAULT 0," +
 			"PRIMARY KEY (`id`)" +
 			") ENGINE=`INNODB` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci",
 	}

@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 
-	"github.com/eaigner/hood"
+	"github.com/kokizzu/hood"
 )
 
 var ho *hood.Hood
