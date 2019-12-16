@@ -25,6 +25,7 @@ All package run in no-cache mode.
 * [Hood](https://github.com/eaigner/hood) latest, [my fork](https://github.com/kokizzu/hood) for memsql
 * [Qbs](https://github.com/coocood/qbs) latest (Disabled stmt cache / [patch](https://gist.github.com/slene/8297019) / [full](https://gist.github.com/slene/8297565)), [my fork](https://github.com/kokizzu/qbs) for memsql
 * [upper.io](https://upper.io/db) latest (updated to v3, can't fix the inefficient `UPDATE SET id = ? WHERE id = ?` that will always fail in MemSQL)
+* [dbr](https://github.com/gocraft/dbr) latest
 
 ### Run
 
